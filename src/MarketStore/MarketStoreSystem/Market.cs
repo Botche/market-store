@@ -1,10 +1,9 @@
 ﻿namespace MarketStore.MarketStoreSystem
 {
     using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
+    using System.Text;
 
-    using MarketStore.GlobalConstants;
+    using MarketStore.Constants;
     using MarketStore.Infrastructure.Exceptions;
     using MarketStore.Infrastructure.Helpers;
     using MarketStore.MarketStoreSystem.Interfaces;
@@ -12,17 +11,18 @@
 
     public class Market : IMarket
     {
+        private const string STARTING_MESSAGE_LINE = "This is market \"{0}\"...";
         private const int MINIMUM_MARKET_NAME_LENGTH = 3;
 
         private static Market instance;
         private static readonly object syncLock = new object();
 
         private string name;
-        private readonly ICollection<Client> clients;
 
         private Market(string name)
         {
             this.Name = name;
+            this.RegistrationDesk = new RegistrationDesk();
         }
 
         public string Name
@@ -32,7 +32,7 @@
             {
                 if (CustomValidator.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentException(ExceptionMessageConstants.MarketNameNullOrWhiteSpaceExceptionMessage);
+                    throw new ArgumentNullException(nameof(this.Name), ExceptionMessageConstants.MarketNameNullOrWhiteSpaceExceptionMessage);
                 }
 
                 if (CustomValidator.IsStringLengthLowerOrEqualTo(value, MINIMUM_MARKET_NAME_LENGTH))
@@ -45,7 +45,9 @@
             }
         }
 
-        public static Market CreateMarket(string name)
+        public RegistrationDesk RegistrationDesk { get; }
+
+        public static Market CreateInstance(string name)
         {
             if (instance == null)
             {
@@ -64,7 +66,7 @@
             throw new AlreadyCreatedException(errorMessage);
         }
 
-        public static Market GetMarket()
+        public static Market GetInstance()
         {
             bool isNull = instance == null;
             if (isNull)
@@ -75,7 +77,7 @@
             return instance;
         }
 
-        public static bool DeleteMarket()
+        public static bool DeleteInstance()
         {
             bool isNull = instance == null;
             if (isNull)
@@ -87,9 +89,15 @@
             return true;
         }
 
-        public void RegisterClientInSystem(string name)
+        public override string ToString()
         {
-            throw new NotImplementedException();
+            StringBuilder stringBuilder = new StringBuilder();
+
+            string startingMessageLine = string.Format(STARTING_MESSAGE_LINE, this.Name);
+            stringBuilder.AppendLine(startingMessageLine);
+            stringBuilder.AppendLine(this.RegistrationDesk.ToString());
+
+            return stringBuilder.ToString().Trim();
         }
     }
 }

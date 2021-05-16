@@ -4,6 +4,7 @@
 
     using MarketStore.Infrastructure.Exceptions;
     using MarketStore.MarketStoreSystem;
+    using MarketStore.MarketStoreSystem.RegistrationSystem;
 
     public class StartUp
     {
@@ -15,7 +16,14 @@
             {
                 try
                 {
-                    Market.CreateMarket("Ivona");
+                    Market.CreateInstance("Ivona");
+
+                    market = Market.GetInstance();
+
+                    Client mike = market.RegistrationDesk.RegistrateClient("Mike");
+                    //Client mike2 = market.RegistrationDesk.RegistrateClient("Mike");
+
+                    Console.WriteLine(market);
                 }
                 catch (AlreadyCreatedException ace)
                 {
@@ -29,6 +37,8 @@
                 {
                     Console.WriteLine(ae.Message);
                 }
+
+                Console.ReadKey();
             }
         }
     }
