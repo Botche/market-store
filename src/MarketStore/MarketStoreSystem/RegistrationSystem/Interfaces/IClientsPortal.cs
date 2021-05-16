@@ -1,6 +1,6 @@
 ﻿namespace MarketStore.MarketStoreSystem.RegistrationSystem.Interfaces
 {
-    public interface IRegistrationDesk
+    public interface IClientsPortal
     {
         Client RegistrateClient(string name);
 
