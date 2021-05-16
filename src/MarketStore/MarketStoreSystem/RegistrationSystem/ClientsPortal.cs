@@ -8,13 +8,13 @@
     using MarketStore.Infrastructure.Exceptions;
     using MarketStore.MarketStoreSystem.RegistrationSystem.Interfaces;
 
-    public class RegistrationDesk : IRegistrationDesk
+    public class ClientsPortal : IRegistrationDesk
     {
         private const string STARTING_MESSAGE_LINE_TO_STRING = "Clients in the market:";
 
         private readonly ICollection<Client> clients;
 
-        public RegistrationDesk()
+        public ClientsPortal()
         {
             this.clients = new HashSet<Client>();
         }

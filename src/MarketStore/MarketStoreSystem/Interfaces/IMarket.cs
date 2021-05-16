@@ -6,6 +6,6 @@
     {
         string Name { get; }
         
-        RegistrationDesk RegistrationDesk { get; }
+        ClientsPortal ClientsPortal { get; }
     }
 }

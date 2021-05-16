@@ -17,12 +17,14 @@
                 try
                 {
                     Market.CreateInstance("Ivona");
-
                     market = Market.GetInstance();
 
-                    Client mike = market.RegistrationDesk.RegistrateClient("Mike");
-                    //Client mike2 = market.RegistrationDesk.RegistrateClient("Mike");
+                    Client mike = market.ClientsPortal.RegistrateClient("Mike");
+                    market.ClientsPortal.RegistrateClient("Gosho");
+                    market.ClientsPortal.RegistrateClient("Ivan");
 
+                    Console.WriteLine(mike);
+                    Console.WriteLine(market.ClientsPortal);
                     Console.WriteLine(market);
                 }
                 catch (AlreadyCreatedException ace)

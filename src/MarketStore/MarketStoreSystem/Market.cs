@@ -22,7 +22,7 @@
         private Market(string name)
         {
             this.Name = name;
-            this.RegistrationDesk = new RegistrationDesk();
+            this.ClientsPortal = new ClientsPortal();
         }
 
         public string Name
@@ -45,7 +45,7 @@
             }
         }
 
-        public RegistrationDesk RegistrationDesk { get; }
+        public ClientsPortal ClientsPortal { get; }
 
         public static Market CreateInstance(string name)
         {
@@ -66,27 +66,19 @@
             throw new AlreadyCreatedException(errorMessage);
         }
 
-        public static Market GetInstance()
+        public static Market ChangeName(string newName)
         {
-            bool isNull = instance == null;
-            if (isNull)
-            {
-                throw new NotCreatedException(ExceptionMessageConstants.NotCreatedMarketExceptionMessage);
-            }
+            CheckIfInstanceIsCreated();
 
+            instance.Name = newName;
             return instance;
         }
 
-        public static bool DeleteInstance()
+        public static Market GetInstance()
         {
-            bool isNull = instance == null;
-            if (isNull)
-            {
-                throw new NotCreatedException(ExceptionMessageConstants.NotCreatedMarketExceptionMessage);
-            }
+            CheckIfInstanceIsCreated();
 
-            instance = null;
-            return true;
+            return instance;
         }
 
         public override string ToString()
@@ -95,9 +87,18 @@
 
             string startingMessageLine = string.Format(STARTING_MESSAGE_LINE, this.Name);
             stringBuilder.AppendLine(startingMessageLine);
-            stringBuilder.AppendLine(this.RegistrationDesk.ToString());
+            stringBuilder.AppendLine(this.ClientsPortal.ToString());
 
             return stringBuilder.ToString().Trim();
+        }
+
+        private static void CheckIfInstanceIsCreated()
+        {
+            bool isNull = instance == null;
+            if (isNull)
+            {
+                throw new NotCreatedException(ExceptionMessageConstants.NotCreatedMarketExceptionMessage);
+            }
         }
     }
 }
