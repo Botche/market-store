@@ -45,6 +45,17 @@
             return client;
         }
 
+        public bool RemoveClient(string name)
+        {
+            Client clientToRemove = this.clients
+                .FirstOrDefault(c => c.Name == name);
+
+            bool isRemoved = this.clients
+                .Remove(clientToRemove);
+
+            return isRemoved;
+        }
+
         public override string ToString()
         {
             StringBuilder stringBuilder = new StringBuilder();
