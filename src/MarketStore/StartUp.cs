@@ -10,38 +10,44 @@
     {
         public static void Main()
         {
-            Market market = null;
+            Market.CreateInstance("Ivona");
+            Market market =  Market.GetInstance();
 
-            while (true)
-            {
-                try
-                {
-                    Market.CreateInstance("Ivona");
-                    market = Market.GetInstance();
+            market.RegistrateClient("Mike");
+            market.RegistrateClient("Gosho");
+            market.RegistrateClient("Ivan");
 
-                    Client mike = market.ClientsPortal.RegistrateClient("Mike");
-                    market.ClientsPortal.RegistrateClient("Gosho");
-                    market.ClientsPortal.RegistrateClient("Ivan");
+            Console.WriteLine(market.MakePurchase(200, "Mike"));
+            market.AssigneeDiscountCardToClient("Bronze", "Mike");
+            Console.WriteLine(market.MakePurchase(200, "Mike"));
+            market.ChangeDiscountCard("Silver", "Mike");
+            Console.WriteLine(market.MakePurchase(200, "Mike"));
+            market.ChangeDiscountCard("Gold", "Mike");
+            Console.WriteLine(market.MakePurchase(200, "Mike"));
+            market.RemoveDiscountCardFromClient("Mike");
+            Console.WriteLine(market.MakePurchase(200, "Mike"));
 
-                    Console.WriteLine(mike);
-                    Console.WriteLine(market.ClientsPortal);
-                    Console.WriteLine(market);
-                }
-                catch (AlreadyCreatedException ace)
-                {
-                    Console.WriteLine(ace.Message);
-                }
-                catch (NotCreatedException nce)
-                {
-                    Console.WriteLine(nce.Message);
-                }
-                catch (ArgumentException ae)
-                {
-                    Console.WriteLine(ae.Message);
-                }
+            //while (true)
+            //{
+            //    try
+            //    {
+            //        Console.WriteLine(market);
+            //    }
+            //    catch (AlreadyCreatedException ace)
+            //    {
+            //        Console.WriteLine(ace.Message);
+            //    }
+            //    catch (NotCreatedException nce)
+            //    {
+            //        Console.WriteLine(nce.Message);
+            //    }
+            //    catch (ArgumentException ae)
+            //    {
+            //        Console.WriteLine(ae.Message);
+            //    }
 
-                Console.ReadKey();
-            }
+            //    Console.ReadKey();
+            //}
         }
     }
 }

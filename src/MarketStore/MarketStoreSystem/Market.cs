@@ -16,13 +16,16 @@
 
         private static Market instance;
         private static readonly object syncLock = new object();
+        private readonly ClientsPortal clientsPortal;
+        private readonly Paydesk paydesk;
 
         private string name;
 
         private Market(string name)
         {
             this.Name = name;
-            this.ClientsPortal = new ClientsPortal();
+            this.clientsPortal = new ClientsPortal();
+            this.paydesk = new Paydesk();
         }
 
         public string Name
@@ -44,8 +47,6 @@
                 name = value;
             }
         }
-
-        public ClientsPortal ClientsPortal { get; }
 
         public static Market CreateInstance(string name)
         {
@@ -81,13 +82,59 @@
             return instance;
         }
 
+        public bool RegistrateClient(string name)
+        {
+            this.clientsPortal.RegistrateClient(name);
+
+            return true;
+        }
+
+        public bool RemoveClient(string name)
+        {
+            this.clientsPortal.RemoveClient(name);
+
+            return true;
+        }
+
+        public bool AssigneeDiscountCardToClient(string cardType, string clientName)
+        {
+            Client client = this.clientsPortal.FindClient(clientName);
+            this.paydesk.AssigneeDiscountCardToClient(cardType, client);
+
+            return true;
+        }
+
+        public bool RemoveDiscountCardFromClient(string clientName)
+        {
+            Client client = this.clientsPortal.FindClient(clientName);
+            this.paydesk.RemoveDiscountCardFromClient(client);
+
+            return true;
+        }
+
+        public bool ChangeDiscountCard(string cardType, string clientName)
+        {
+            Client client = this.clientsPortal.FindClient(clientName);
+            this.paydesk.ChangeDiscountCard(cardType, client);
+
+            return true;
+        }
+
+        public double MakePurchase(double sumToPay, string clientName)
+        {
+            Client client = this.clientsPortal.FindClient(clientName);
+            double discountedSum = client.MakePurchase(sumToPay);
+
+            return discountedSum;
+        }
+
         public override string ToString()
         {
             StringBuilder stringBuilder = new StringBuilder();
 
             string startingMessageLine = string.Format(STARTING_MESSAGE_LINE, this.Name);
             stringBuilder.AppendLine(startingMessageLine);
-            stringBuilder.AppendLine(this.ClientsPortal.ToString());
+            stringBuilder.AppendLine(this.clientsPortal.ToString());
 
             return stringBuilder.ToString().Trim();
         }

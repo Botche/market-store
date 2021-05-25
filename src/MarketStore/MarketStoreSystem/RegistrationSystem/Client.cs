@@ -18,10 +18,10 @@
             this.DiscountCard = null;
         }
 
-        public string Name 
-        { 
+        public string Name
+        {
             get => name;
-            private set 
+            private set
             {
                 if (CustomValidator.IsNullOrWhiteSpace(value))
                 {
@@ -35,7 +35,7 @@
                 }
 
                 name = value;
-            } 
+            }
         }
 
         public ICard DiscountCard { get; set; }
@@ -49,17 +49,18 @@
             return toStringMessage;
         }
 
-        public bool MakePurchase(double spentMoney)
+        public double MakePurchase(double spentMoney)
         {
             if (CustomValidator.IsBelowZero(spentMoney))
             {
                 throw new ArgumentOutOfRangeException(nameof(spentMoney), ExceptionMessageConstants.SpentSumBelowZeroMessage);
             }
 
-            double discountMultiplier = 1 - this.DiscountCard.DiscountRate;
+            double discountRate = this.DiscountCard == null ? 0 : this.DiscountCard.DiscountRate;
+            double discountMultiplier = 1 - (discountRate / 100);
             double sumWithDiscount = spentMoney * discountMultiplier;
             this.SpentMoney += sumWithDiscount;
-            return true;
+            return sumWithDiscount;
         }
     }
 }
