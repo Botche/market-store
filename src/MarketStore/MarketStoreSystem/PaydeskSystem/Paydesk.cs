@@ -1,20 +1,52 @@
 ﻿namespace MarketStore.MarketStoreSystem
 {
+    using System;
+
+    using MarketStore.Constants;
     using MarketStore.MarketStoreSystem.PaydeskSystem.ClubCards.Interfaces;
     using MarketStore.MarketStoreSystem.PaydeskSystem.ClubCards.Variantions;
     using MarketStore.MarketStoreSystem.PaydeskSystem.Interfaces;
+    using MarketStore.MarketStoreSystem.RegistrationSystem;
 
     public class Paydesk : IPaydesk
     {
-        private readonly ICard bronzeCard;
-        private readonly ICard silverCard;
-        private readonly ICard goldCard;
-
-        public Paydesk()
+        public bool AssigneeDiscountCardToClient(string cardType, Client client)
         {
-            this.bronzeCard = new BronzeCard();
-            this.silverCard = new SilverCard();
-            this.goldCard = new GoldCard();
+            string cardTypeToLower = cardType.ToLower();
+            ICard discountCard = null;
+            switch (cardTypeToLower)
+            {
+                case GlobalConstants.BronzeCardName:
+                    discountCard = new BronzeCard();
+                    break;
+                case GlobalConstants.SilverCardName:
+                    discountCard = new SilverCard();
+                    break;
+                case GlobalConstants.GoldCardName:
+                    discountCard = new GoldCard();
+                    break;
+
+                default:
+                    throw new ArgumentException(ExceptionMessageConstants.InvalidaCardTypeMessage);
+            }
+
+            client.DiscountCard = discountCard;
+
+            return true;
+        }
+
+        public bool ChangeDiscountCard(string cardType, Client client)
+        {
+            bool isSuccessful = this.RemoveDiscountCardFromClient(client);
+            isSuccessful &= this.AssigneeDiscountCardToClient(cardType, client);
+
+            return isSuccessful;
+        }
+
+        public bool RemoveDiscountCardFromClient(Client client)
+        {
+            client.DiscountCard = null;
+            return true;
         }
     }
 }

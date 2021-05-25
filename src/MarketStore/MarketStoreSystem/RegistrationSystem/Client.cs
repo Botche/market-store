@@ -4,6 +4,7 @@
 
     using MarketStore.Constants;
     using MarketStore.Infrastructure.Helpers;
+    using MarketStore.MarketStoreSystem.PaydeskSystem.ClubCards.Interfaces;
 
     public class Client
     {
@@ -14,6 +15,7 @@
         public Client(string name)
         {
             this.Name = name;
+            this.DiscountCard = null;
         }
 
         public string Name 
@@ -36,6 +38,8 @@
             } 
         }
 
+        public ICard DiscountCard { get; set; }
+
         public double SpentMoney { get; private set; }
 
         public override string ToString()
@@ -52,7 +56,9 @@
                 throw new ArgumentOutOfRangeException(nameof(spentMoney), ExceptionMessageConstants.SpentSumBelowZeroMessage);
             }
 
-            this.SpentMoney += spentMoney;
+            double discountMultiplier = 1 - this.DiscountCard.DiscountRate;
+            double sumWithDiscount = spentMoney * discountMultiplier;
+            this.SpentMoney += sumWithDiscount;
             return true;
         }
     }

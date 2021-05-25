@@ -15,8 +15,6 @@
         public Card(double discountRate = 0)
         {
             this.DiscountRate = discountRate;
-
-            this.CardHolders = new HashSet<Client>();
         }
 
         public double DiscountRate
@@ -32,7 +30,5 @@
                 this.discountRate = value;
             }
         }
-
-        public ICollection<Client> CardHolders { get; protected set; }
     }
 }
