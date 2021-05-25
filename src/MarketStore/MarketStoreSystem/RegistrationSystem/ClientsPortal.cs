@@ -8,7 +8,7 @@
     using MarketStore.Infrastructure.Exceptions;
     using MarketStore.MarketStoreSystem.RegistrationSystem.Interfaces;
 
-    public class ClientsPortal : IRegistrationDesk
+    public class ClientsPortal : IClientsPortal
     {
         private const string STARTING_MESSAGE_LINE_TO_STRING = "Clients in the market:";
 

@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="MarketStoreSystem\Cards\" />
     <Folder Include="MarketStoreSystem\Interfaces\" />
   </ItemGroup>
 

@@ -11,6 +11,11 @@
 
         private string name;
 
+        public Client(string name)
+        {
+            this.Name = name;
+        }
+
         public string Name 
         { 
             get => name;
@@ -31,16 +36,24 @@
             } 
         }
 
-        public Client(string name)
-        {
-            this.Name = name;
-        }
+        public double SpentMoney { get; private set; }
 
         public override string ToString()
         {
             string toStringMessage = $"-- Client name: {this.Name}";
 
             return toStringMessage;
+        }
+
+        public bool MakePurchase(double spentMoney)
+        {
+            if (CustomValidator.IsBelowZero(spentMoney))
+            {
+                throw new ArgumentOutOfRangeException(nameof(spentMoney), ExceptionMessageConstants.SpentSumBelowZeroMessage);
+            }
+
+            this.SpentMoney += spentMoney;
+            return true;
         }
     }
 }

@@ -13,5 +13,10 @@
         {
             return string.IsNullOrWhiteSpace(value);
         }
+
+        public static bool IsBelowZero(double value)
+        {
+            return value < 0;
+        }
     }
 }
