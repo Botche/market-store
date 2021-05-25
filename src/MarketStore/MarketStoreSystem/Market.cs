@@ -91,7 +91,13 @@
 
         public bool RemoveClient(string name)
         {
-            this.clientsPortal.RemoveClient(name);
+            bool isRemoved = this.clientsPortal.RemoveClient(name);
+
+            if (isRemoved == false)
+            {
+                string errorMessage = string.Format(ExceptionMessageConstants.ClientDoesNotExistsExceptionMessage, name);
+                throw new ArgumentException(errorMessage);
+            }
 
             return true;
         }
@@ -99,6 +105,8 @@
         public bool AssigneeDiscountCardToClient(string cardType, string clientName)
         {
             Client client = this.clientsPortal.FindClient(clientName);
+            this.CheckIfClientIsNull(client, clientName);
+
             this.paydesk.AssigneeDiscountCardToClient(cardType, client);
 
             return true;
@@ -107,6 +115,8 @@
         public bool RemoveDiscountCardFromClient(string clientName)
         {
             Client client = this.clientsPortal.FindClient(clientName);
+            this.CheckIfClientIsNull(client, clientName);
+
             this.paydesk.RemoveDiscountCardFromClient(client);
 
             return true;
@@ -115,6 +125,8 @@
         public bool ChangeDiscountCard(string cardType, string clientName)
         {
             Client client = this.clientsPortal.FindClient(clientName);
+            this.CheckIfClientIsNull(client, clientName);
+
             this.paydesk.ChangeDiscountCard(cardType, client);
 
             return true;
@@ -123,6 +135,8 @@
         public double MakePurchase(double sumToPay, string clientName)
         {
             Client client = this.clientsPortal.FindClient(clientName);
+            this.CheckIfClientIsNull(client, clientName);
+
             double discountedSum = client.MakePurchase(sumToPay);
 
             return discountedSum;
@@ -137,6 +151,16 @@
             stringBuilder.AppendLine(this.clientsPortal.ToString());
 
             return stringBuilder.ToString().Trim();
+        }
+
+        private void CheckIfClientIsNull(Client client, string clientName)
+        {
+            bool isClientNull = client == null;
+            if (isClientNull)
+            {
+                string errorMessage = string.Format(ExceptionMessageConstants.ClientDoesNotExistsExceptionMessage, clientName);
+                throw new ArgumentException(errorMessage);
+            }
         }
 
         private static void CheckIfInstanceIsCreated()

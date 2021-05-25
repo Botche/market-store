@@ -27,27 +27,33 @@
             market.RemoveDiscountCardFromClient("Mike");
             Console.WriteLine(market.MakePurchase(200, "Mike"));
 
-            //while (true)
-            //{
-            //    try
-            //    {
-            //        Console.WriteLine(market);
-            //    }
-            //    catch (AlreadyCreatedException ace)
-            //    {
-            //        Console.WriteLine(ace.Message);
-            //    }
-            //    catch (NotCreatedException nce)
-            //    {
-            //        Console.WriteLine(nce.Message);
-            //    }
-            //    catch (ArgumentException ae)
-            //    {
-            //        Console.WriteLine(ae.Message);
-            //    }
-
-            //    Console.ReadKey();
-            //}
+            string command = string.Empty;
+            while ((command = Console.ReadLine()) != "Exit")
+            {
+                try
+                {
+                    // market.RemoveClient("Not exist");
+                    // market.RegistrateClient("Mike");
+                    // market.AssigneeDiscountCardToClient("purple", "Mike");
+                    // market.AssigneeDiscountCardToClient("gold", "Not exist");
+                    // market.ChangeDiscountCard("purple", "Mike");
+                    // market.ChangeDiscountCard("silver", "Not exist");
+                    // market.RemoveDiscountCardFromClient("Mike");
+                    // market.RemoveDiscountCardFromClient("Not exist");
+                }
+                catch (AlreadyCreatedException ace)
+                {
+                    Console.WriteLine(ace.Message);
+                }
+                catch (NotCreatedException nce)
+                {
+                    Console.WriteLine(nce.Message);
+                }
+                catch (ArgumentException ae)
+                {
+                    Console.WriteLine(ae.Message);
+                }
+            }
         }
     }
 }

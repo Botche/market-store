@@ -53,7 +53,7 @@
         {
             if (CustomValidator.IsBelowZero(spentMoney))
             {
-                throw new ArgumentOutOfRangeException(nameof(spentMoney), ExceptionMessageConstants.SpentSumBelowZeroMessage);
+                throw new ArgumentOutOfRangeException(nameof(spentMoney), ExceptionMessageConstants.SpentSumBelowZeroExceptionMessage);
             }
 
             double discountRate = this.DiscountCard == null ? 0 : this.DiscountCard.DiscountRate;

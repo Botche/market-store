@@ -24,7 +24,7 @@
             {
                 if (CustomValidator.IsBelowZero(value))
                 {
-                    throw new ArgumentOutOfRangeException(nameof(this.DiscountRate), ExceptionMessageConstants.DiscountRateBelowZeroMessage);
+                    throw new ArgumentOutOfRangeException(nameof(this.DiscountRate), ExceptionMessageConstants.DiscountRateBelowZeroExceptionMessage);
                 }
 
                 this.discountRate = value;

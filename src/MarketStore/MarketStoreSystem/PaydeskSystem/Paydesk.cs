@@ -27,7 +27,7 @@
                     break;
 
                 default:
-                    throw new ArgumentException(ExceptionMessageConstants.InvalidaCardTypeMessage);
+                    throw new ArgumentException(ExceptionMessageConstants.InvalidaCardTypeExceptionMessage);
             }
 
             client.DiscountCard = discountCard;
