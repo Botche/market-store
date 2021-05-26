@@ -24,6 +24,7 @@
             {
                 stringBuilder.AppendLine($"-- {this.GenerateCommandName(commandType.Name)}");
             }
+            stringBuilder.AppendLine("-- Exit");
 
             return stringBuilder.ToString().Trim();
         }
