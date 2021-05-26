@@ -16,18 +16,18 @@
             ICard discountCard = null;
             switch (cardTypeToLower)
             {
-                case GlobalConstants.BronzeCardName:
+                case GlobalConstants.BRONZE_CARD_NAME:
                     discountCard = new BronzeCard();
                     break;
-                case GlobalConstants.SilverCardName:
+                case GlobalConstants.SILVER_CARD_NAME:
                     discountCard = new SilverCard();
                     break;
-                case GlobalConstants.GoldCardName:
+                case GlobalConstants.GOLD_CARD_NAME:
                     discountCard = new GoldCard();
                     break;
 
                 default:
-                    throw new ArgumentException(ExceptionMessageConstants.InvalidaCardTypeExceptionMessage);
+                    throw new ArgumentException(ExceptionMessageConstants.INVALID_CARD_TYPE_EXCEPTION_MESSAGE);
             }
 
             client.DiscountCard = discountCard;

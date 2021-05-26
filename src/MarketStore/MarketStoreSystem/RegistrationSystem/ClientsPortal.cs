@@ -19,14 +19,14 @@
             this.clients = new HashSet<Client>();
         }
 
-        public Client RegistrateClient(string name)
+        public Client RegisterClient(string name)
         {
             Client clientWithSameName = this.FindClient(name);
 
             bool isNull = clientWithSameName == null;
             if (isNull == false)
             {
-                string errorMessage = string.Format(ExceptionMessageConstants.AlreadyCreatedClientExceptionMessage, name);
+                string errorMessage = string.Format(ExceptionMessageConstants.ALREADY_CREATED_CLIENT_EXCEPTION_MESSAGE, name);
                 throw new AlreadyCreatedException(errorMessage);
             }
 
@@ -65,7 +65,7 @@
             {
                 stringBuilder.AppendLine(client.ToString());
             }
-            stringBuilder.AppendLine(GlobalConstants.LineSeparator);
+            stringBuilder.AppendLine(GlobalConstants.LINE_SEPARATOR);
 
             return stringBuilder.ToString().Trim();
         }

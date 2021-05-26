@@ -1,12 +1,10 @@
 ﻿namespace MarketStore.MarketStoreSystem.PaydeskSystem.ClubCards
 {
     using System;
-    using System.Collections.Generic;
 
     using MarketStore.Constants;
     using MarketStore.Infrastructure.Helpers;
     using MarketStore.MarketStoreSystem.PaydeskSystem.ClubCards.Interfaces;
-    using MarketStore.MarketStoreSystem.RegistrationSystem;
 
     public abstract class Card : ICard
     {
@@ -24,7 +22,7 @@
             {
                 if (CustomValidator.IsBelowZero(value))
                 {
-                    throw new ArgumentOutOfRangeException(nameof(this.DiscountRate), ExceptionMessageConstants.DiscountRateBelowZeroExceptionMessage);
+                    throw new ArgumentOutOfRangeException(nameof(this.DiscountRate), ExceptionMessageConstants.DISCOUNT_RATE_BELOW_ZERO_EXCEPTION_MESSAGE);
                 }
 
                 this.discountRate = value;

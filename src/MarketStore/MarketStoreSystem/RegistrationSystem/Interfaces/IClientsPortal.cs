@@ -2,7 +2,7 @@
 {
     public interface IClientsPortal
     {
-        Client RegistrateClient(string name);
+        Client RegisterClient(string name);
 
         Client FindClient(string name);
 

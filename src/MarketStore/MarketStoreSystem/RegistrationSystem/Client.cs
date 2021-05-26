@@ -25,12 +25,12 @@
             {
                 if (CustomValidator.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentNullException(nameof(this.Name), ExceptionMessageConstants.ClientNameNullOrWhiteSpaceExceptionMessage);
+                    throw new ArgumentNullException(nameof(this.Name), ExceptionMessageConstants.CLIENT_NAME_NULL_OR_WHITE_SPACE_EXCEPTION_MESSAGE);
                 }
 
                 if (CustomValidator.IsStringLengthLowerOrEqualTo(value, CLIENT_NAME_MIN_LENGTH))
                 {
-                    string errorMessage = string.Format(ExceptionMessageConstants.MinimumClientNameLengthExceptionMessage, CLIENT_NAME_MIN_LENGTH);
+                    string errorMessage = string.Format(ExceptionMessageConstants.MINIMUM_CLIENT_NAME_LENGTH_EXCEPTION_MESSAGE, CLIENT_NAME_MIN_LENGTH);
                     throw new ArgumentException(errorMessage);
                 }
 
@@ -53,7 +53,7 @@
         {
             if (CustomValidator.IsBelowZero(spentMoney))
             {
-                throw new ArgumentOutOfRangeException(nameof(spentMoney), ExceptionMessageConstants.SpentSumBelowZeroExceptionMessage);
+                throw new ArgumentOutOfRangeException(nameof(spentMoney), ExceptionMessageConstants.SPENT_SUM_BELOW_ZERO_EXCEPTION_MESSAGE);
             }
 
             double discountRate = this.DiscountCard == null ? 0 : this.DiscountCard.DiscountRate;

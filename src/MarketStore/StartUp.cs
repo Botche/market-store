@@ -2,9 +2,9 @@
 {
     using System;
 
+    using MarketStore.Constants;
     using MarketStore.Infrastructure.Exceptions;
     using MarketStore.MarketStoreSystem;
-    using MarketStore.MarketStoreSystem.RegistrationSystem;
 
     public class StartUp
     {
@@ -12,34 +12,18 @@
         {
             Market.CreateInstance("Ivona");
             Market market =  Market.GetInstance();
-
-            market.RegistrateClient("Mike");
-            market.RegistrateClient("Gosho");
-            market.RegistrateClient("Ivan");
-
-            Console.WriteLine(market.MakePurchase(200, "Mike"));
-            market.AssigneeDiscountCardToClient("Bronze", "Mike");
-            Console.WriteLine(market.MakePurchase(200, "Mike"));
-            market.ChangeDiscountCard("Silver", "Mike");
-            Console.WriteLine(market.MakePurchase(200, "Mike"));
-            market.ChangeDiscountCard("Gold", "Mike");
-            Console.WriteLine(market.MakePurchase(200, "Mike"));
-            market.RemoveDiscountCardFromClient("Mike");
-            Console.WriteLine(market.MakePurchase(200, "Mike"));
+            CommandInterpretator commandInterpreter = new CommandInterpretator(market);
 
             string command = string.Empty;
             while ((command = Console.ReadLine()) != "Exit")
             {
                 try
                 {
-                    // market.RemoveClient("Not exist");
-                    // market.RegistrateClient("Mike");
-                    // market.AssigneeDiscountCardToClient("purple", "Mike");
-                    // market.AssigneeDiscountCardToClient("gold", "Not exist");
-                    // market.ChangeDiscountCard("purple", "Mike");
-                    // market.ChangeDiscountCard("silver", "Not exist");
-                    // market.RemoveDiscountCardFromClient("Mike");
-                    // market.RemoveDiscountCardFromClient("Not exist");
+                    commandInterpreter.ProcessCommand(command);
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    Console.WriteLine(ExceptionMessageConstants.INVALID_NUMBER_OF_ARGUMENTS_EXCEPTION_MESSAGE);
                 }
                 catch (AlreadyCreatedException ace)
                 {
@@ -52,7 +36,7 @@
                 catch (ArgumentException ae)
                 {
                     Console.WriteLine(ae.Message);
-                }
+                } 
             }
         }
     }

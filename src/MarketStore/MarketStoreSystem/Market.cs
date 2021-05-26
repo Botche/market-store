@@ -35,12 +35,12 @@
             {
                 if (CustomValidator.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentNullException(nameof(this.Name), ExceptionMessageConstants.MarketNameNullOrWhiteSpaceExceptionMessage);
+                    throw new ArgumentNullException(nameof(this.Name), ExceptionMessageConstants.MARKET_NAME_NULL_OR_WHITE_SPACE_EXCEPTION_MESSAGE);
                 }
 
                 if (CustomValidator.IsStringLengthLowerOrEqualTo(value, MINIMUM_MARKET_NAME_LENGTH))
                 {
-                    string exceptionMessage = string.Format(ExceptionMessageConstants.MinimumMarketNameLengthExceptionMessage, MINIMUM_MARKET_NAME_LENGTH);
+                    string exceptionMessage = string.Format(ExceptionMessageConstants.MINIMUM_MARKET_NAME_LENGTH_EXCEPTION_MESSAGE, MINIMUM_MARKET_NAME_LENGTH);
                     throw new ArgumentException(exceptionMessage);
                 }
 
@@ -63,7 +63,7 @@
                 }
             }
 
-            string errorMessage = string.Format(ExceptionMessageConstants.AlreadyCreatedMarketExceptionMessage, instance.Name);
+            string errorMessage = string.Format(ExceptionMessageConstants.ALREADY_CREATED_MARKET_EXCEPTION_MESSAGE, instance.Name);
             throw new AlreadyCreatedException(errorMessage);
         }
 
@@ -82,9 +82,9 @@
             return instance;
         }
 
-        public bool RegistrateClient(string name)
+        public bool RegisterClient(string name)
         {
-            this.clientsPortal.RegistrateClient(name);
+            this.clientsPortal.RegisterClient(name);
 
             return true;
         }
@@ -95,7 +95,7 @@
 
             if (isRemoved == false)
             {
-                string errorMessage = string.Format(ExceptionMessageConstants.ClientDoesNotExistsExceptionMessage, name);
+                string errorMessage = string.Format(ExceptionMessageConstants.CLIENT_DOES_NOT_EXISTS_EXCEPTION_MESSAGE, name);
                 throw new ArgumentException(errorMessage);
             }
 
@@ -158,7 +158,7 @@
             bool isClientNull = client == null;
             if (isClientNull)
             {
-                string errorMessage = string.Format(ExceptionMessageConstants.ClientDoesNotExistsExceptionMessage, clientName);
+                string errorMessage = string.Format(ExceptionMessageConstants.CLIENT_DOES_NOT_EXISTS_EXCEPTION_MESSAGE, clientName);
                 throw new ArgumentException(errorMessage);
             }
         }
@@ -168,7 +168,7 @@
             bool isNull = instance == null;
             if (isNull)
             {
-                throw new NotCreatedException(ExceptionMessageConstants.NotCreatedMarketExceptionMessage);
+                throw new NotCreatedException(ExceptionMessageConstants.NOT_CREATED_MARKET_EXCEPTION_MESSAGE);
             }
         }
     }
