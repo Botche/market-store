@@ -4,6 +4,6 @@
 
     public interface ICommand
     {
-        void Execute(IMarket market, params string[] arguments);
+        string Execute(IMarket market, params string[] arguments);
     }
 }

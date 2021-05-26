@@ -7,9 +7,9 @@
 
     public class PrintInfoCommand : ICommand
     {
-        public void Execute(IMarket market, params string[] arguments)
+        public string Execute(IMarket market, params string[] arguments)
         {
-            Console.WriteLine(market);
+            return market.ToString();
         }
     }
 }

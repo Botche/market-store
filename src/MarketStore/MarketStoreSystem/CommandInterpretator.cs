@@ -1,5 +1,6 @@
 ﻿namespace MarketStore.MarketStoreSystem
 {
+    using System;
     using System.Linq;
 
     using MarketStore.MarketStoreSystem.Commands.Interfaces;
@@ -27,7 +28,7 @@
             string commandType = commandTypeFirstParam + commandTypeSecondParam;
             ICommand command = this.commandFactory.Create(commandType);
 
-            command.Execute(this.market, arguments);
+            Console.WriteLine(command.Execute(this.market, arguments));
         }
     }
 }

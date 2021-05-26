@@ -11,7 +11,7 @@
         public static void Main()
         {
             Market.CreateInstance("Ivona");
-            Market market =  Market.GetInstance();
+            Market market = Market.GetInstance();
             CommandInterpretator commandInterpreter = new CommandInterpretator(market);
 
             string command = string.Empty;
@@ -36,7 +36,11 @@
                 catch (ArgumentException ae)
                 {
                     Console.WriteLine(ae.Message);
-                } 
+                }
+                catch (InvalidOperationException ioe)
+                {
+                    Console.WriteLine(ioe.Message);
+                }
             }
         }
     }

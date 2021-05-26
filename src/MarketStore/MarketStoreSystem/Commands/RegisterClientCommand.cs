@@ -1,13 +1,18 @@
 ﻿namespace MarketStore.MarketStoreSystem.Commands
 {
+    using MarketStore.Constants;
     using MarketStore.MarketStoreSystem.Commands.Interfaces;
     using MarketStore.MarketStoreSystem.Interfaces;
 
     class RegisterClientCommand : ICommand
     {
-        public void Execute(IMarket market, params string[] arguments)
+        public string Execute(IMarket market, params string[] arguments)
         {
-            market.RegisterClient(arguments[0]);
+            string clientName = arguments[0];
+            market.RegisterClient(clientName);
+
+            string messageToReturn = string.Format(CommandsMessagesConstants.SUCCESSFULLY_REGISTERED_CLIENT, clientName);
+            return messageToReturn;
         }
     }
 }
