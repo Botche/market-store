@@ -13,6 +13,7 @@
             Market.CreateInstance("Ivona");
             Market market = Market.GetInstance();
             CommandInterpretator commandInterpreter = new CommandInterpretator(market);
+            commandInterpreter.ProcessCommand("Commands info");
 
             string command = string.Empty;
             while ((command = Console.ReadLine()) != "Exit")
